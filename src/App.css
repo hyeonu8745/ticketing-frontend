@@ -1,38 +1,250 @@
-.App {
-  text-align: center;
+/* ======================================================
+   VIVID HW — NOL-style Design System
+   화이트 베이스 / 핑크 포인트 / Pretendard 타이포
+====================================================== */
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+:root {
+  --pink:        #ff2351;
+  --pink-light:  #fff0f3;
+  --pink-mid:    #ffe0e7;
+  --black:       #0a0a0a;
+  --gray-900:    #1a1a1a;
+  --gray-700:    #444;
+  --gray-500:    #888;
+  --gray-300:    #ccc;
+  --gray-100:    #f5f5f5;
+  --gray-50:     #fafafa;
+  --white:       #ffffff;
+  --border:      #ebebeb;
+  --radius-sm:   8px;
+  --radius-md:   14px;
+  --radius-lg:   22px;
+  --shadow-sm:   0 2px 8px rgba(0,0,0,0.06);
+  --shadow-md:   0 8px 24px rgba(0,0,0,0.09);
+  --shadow-lg:   0 20px 50px rgba(0,0,0,0.12);
+  --shadow-pink: 0 8px 24px rgba(255,35,81,0.22);
+  --transition:  all 0.2s cubic-bezier(.4,0,.2,1);
+
+  /* 기존 변수명 호환 */
+  --vivid-pink: #ff2351;
+  --vivid-black: #0a0a0a;
+  --vivid-gray-bg: #f5f5f5;
+  --vivid-white: #ffffff;
+  --vivid-border: #ebebeb;
+  --vivid-text-sub: #888888;
+  --interpark-red: #ff2351;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--white);
+  color: var(--black);
+  letter-spacing: -0.3px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* ── 레이아웃 ── */
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* ── 네비게이션 ── */
+.navbar {
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+  height: 64px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-700);
+  padding: 8px 14px;
+  border-radius: 50px;
+  transition: var(--transition);
+  font-family: 'Pretendard', sans-serif;
+  letter-spacing: -0.3px;
+}
+.nav-btn:hover {
+  background: var(--gray-100);
+  color: var(--black);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ── 검색창 ── */
+.vivid-input {
+  width: 100%;
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  padding: 10px 44px 10px 18px;
+  font-size: 14px;
+  font-family: 'Pretendard', sans-serif;
+  background: var(--gray-50);
+  color: var(--black);
+  outline: none;
+  transition: var(--transition);
+  letter-spacing: -0.3px;
+}
+.vivid-input:focus {
+  border-color: var(--pink);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(255,35,81,0.08);
+}
+.vivid-input::placeholder { color: var(--gray-300); }
+
+/* ── 히어로 배너 ── */
+.hero-banner {
+  width: 100%;
+  height: 300px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 48px;
+}
+
+/* ── 섹션 타이틀 ── */
+.section-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--black);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: -0.5px;
+}
+
+/* ── 카테고리 탭 ── */
+.category-tabs {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  margin-bottom: 30px;
+}
+.category-tabs::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  height: 36px;
+  padding: 0 18px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Pretendard', sans-serif;
+  color: var(--gray-500);
+  background: var(--gray-100);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: -0.3px;
+}
+.tab-btn:hover { background: #e8e8e8; color: var(--black); }
+.tab-btn.active {
+  background: var(--black);
+  color: var(--white);
+}
+
+/* ── 이벤트 그리드 ── */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  gap: 24px 16px;
+  padding-bottom: 60px;
+}
+
+/* ── 슬라이더 화살표 ── */
+.scroll-arrow-btn {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  z-index: 20;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  color: var(--gray-700);
+  transition: var(--transition);
+}
+.scroll-arrow-btn:hover {
+  background: var(--black);
+  color: var(--white);
+  border-color: var(--black);
+  transform: translateY(-50%) scale(1.08);
+}
+.scroll-arrow-btn.left { left: -18px; }
+.scroll-arrow-btn.right { right: -18px; }
+
+/* ── 공통 버튼 ── */
+.vivid-button {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 100%;
+  padding: 16px;
+  background: var(--pink);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 16px;
+  font-weight: 800;
+  font-family: 'Pretendard', sans-serif;
+  cursor: pointer;
+  transition: var(--transition);
+  letter-spacing: -0.3px;
+}
+.vivid-button:hover {
+  background: #e61e4a;
+  box-shadow: var(--shadow-pink);
+  transform: translateY(-1px);
+}
+.vivid-button:active { transform: translateY(0); }
+.vivid-button:disabled {
+  background: var(--gray-300);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ── 스크롤바 숨김 ── */
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+
+/* ── 로딩 스피너 ── */
+.spinner {
+  width: 40px; height: 40px;
+  border: 3px solid var(--gray-100);
+  border-top-color: var(--pink);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 0 auto;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── 반응형 ── */
+@media (max-width: 768px) {
+  .container { padding: 0 16px; }
+  .hero-banner { height: 200px; }
+  .event-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px 12px; }
 }
