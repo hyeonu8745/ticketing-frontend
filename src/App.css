@@ -1,14 +1,16 @@
 /* ======================================================
-   VIVID HW — NOL-style Design System
-   화이트 베이스 / 핑크 포인트 / Pretendard 타이포
+   VIVID HW — Sharp Blue Design System
+   화이트 베이스 / 샤프 블루 포인트 / Pretendard
 ====================================================== */
 
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
 :root {
-  --pink:        #ff2351;
-  --pink-light:  #fff0f3;
-  --pink-mid:    #ffe0e7;
+  --blue:        #2563eb;   /* 메인 블루 */
+  --blue-deep:   #1e40af;   /* 강조/호버 */
+  --blue-dark:   #1e3a8a;   /* 가장 진한 톤 */
+  --blue-light:  #eff6ff;   /* 매우 옅은 배경 */
+  --blue-mid:    #dbeafe;   /* 옅은 배경 */
   --black:       #0a0a0a;
   --gray-900:    #1a1a1a;
   --gray-700:    #444;
@@ -24,17 +26,17 @@
   --shadow-sm:   0 2px 8px rgba(0,0,0,0.06);
   --shadow-md:   0 8px 24px rgba(0,0,0,0.09);
   --shadow-lg:   0 20px 50px rgba(0,0,0,0.12);
-  --shadow-pink: 0 8px 24px rgba(255,35,81,0.22);
+  --shadow-blue: 0 8px 24px rgba(37,99,235,0.25);
   --transition:  all 0.2s cubic-bezier(.4,0,.2,1);
 
-  /* 기존 변수명 호환 */
-  --vivid-pink: #ff2351;
+  /* 기존 변수명 호환 (legacy alias) */
+  --vivid-pink: #2563eb;
   --vivid-black: #0a0a0a;
   --vivid-gray-bg: #f5f5f5;
   --vivid-white: #ffffff;
   --vivid-border: #ebebeb;
   --vivid-text-sub: #888888;
-  --interpark-red: #ff2351;
+  --interpark-red: #2563eb;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -49,20 +51,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── 레이아웃 ── */
 .container {
   max-width: 1080px;
   margin: 0 auto;
   padding: 0 24px;
 }
 
-/* ── 네비게이션 ── */
 .navbar {
   background: rgba(255,255,255,0.96);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
-  padding: 0;
   height: 64px;
   position: sticky;
   top: 0;
@@ -89,7 +88,6 @@ body {
   color: var(--black);
 }
 
-/* ── 검색창 ── */
 .vivid-input {
   width: 100%;
   border: 1.5px solid var(--border);
@@ -104,13 +102,12 @@ body {
   letter-spacing: -0.3px;
 }
 .vivid-input:focus {
-  border-color: var(--pink);
+  border-color: var(--blue);
   background: var(--white);
-  box-shadow: 0 0 0 3px rgba(255,35,81,0.08);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.10);
 }
 .vivid-input::placeholder { color: var(--gray-300); }
 
-/* ── 히어로 배너 ── */
 .hero-banner {
   width: 100%;
   height: 300px;
@@ -120,7 +117,6 @@ body {
   margin-bottom: 48px;
 }
 
-/* ── 섹션 타이틀 ── */
 .section-title {
   font-size: 18px;
   font-weight: 800;
@@ -132,7 +128,6 @@ body {
   letter-spacing: -0.5px;
 }
 
-/* ── 카테고리 탭 ── */
 .category-tabs {
   display: flex;
   gap: 6px;
@@ -164,7 +159,6 @@ body {
   color: var(--white);
 }
 
-/* ── 이벤트 그리드 ── */
 .event-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
@@ -172,7 +166,6 @@ body {
   padding-bottom: 60px;
 }
 
-/* ── 슬라이더 화살표 ── */
 .scroll-arrow-btn {
   position: absolute;
   top: 40%;
@@ -198,12 +191,11 @@ body {
 .scroll-arrow-btn.left { left: -18px; }
 .scroll-arrow-btn.right { right: -18px; }
 
-/* ── 공통 버튼 ── */
 .vivid-button {
   display: inline-flex; align-items: center; justify-content: center;
   width: 100%;
   padding: 16px;
-  background: var(--pink);
+  background: var(--blue);
   color: #fff;
   border: none;
   border-radius: var(--radius-md);
@@ -215,8 +207,8 @@ body {
   letter-spacing: -0.3px;
 }
 .vivid-button:hover {
-  background: #e61e4a;
-  box-shadow: var(--shadow-pink);
+  background: var(--blue-deep);
+  box-shadow: var(--shadow-blue);
   transform: translateY(-1px);
 }
 .vivid-button:active { transform: translateY(0); }
@@ -227,22 +219,19 @@ body {
   box-shadow: none;
 }
 
-/* ── 스크롤바 숨김 ── */
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 
-/* ── 로딩 스피너 ── */
 .spinner {
   width: 40px; height: 40px;
   border: 3px solid var(--gray-100);
-  border-top-color: var(--pink);
+  border-top-color: var(--blue);
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
   margin: 0 auto;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── 반응형 ── */
 @media (max-width: 768px) {
   .container { padding: 0 16px; }
   .hero-banner { height: 200px; }

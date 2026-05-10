@@ -1,6 +1,7 @@
 // src/pages/MyPage.js
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import logo from '../assets/logo.png';
 import { getMyReservations, cancelReservation } from '../api/paymentApi';
 import { getUserProfile, updateProfile, chargePoints } from '../api/authApi';
 import '../App.css';
@@ -63,9 +64,7 @@ function MyPage() {
     <div style={{ backgroundColor: '#fafafa', minHeight: '100vh' }}>
       <nav className="navbar" style={{ backgroundColor: '#fff' }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-          <div onClick={() => navigate('/')} style={{ fontSize: '22px', fontWeight: '900', color: '#ff2351', cursor: 'pointer', letterSpacing: '-2px', userSelect: 'none' }}>
-            VIVID HW
-          </div>
+          <img src={logo} alt="DEAR TICKET" onClick={() => navigate('/')} style={{ height: '36px', cursor: 'pointer', userSelect: 'none', objectFit: 'contain' }} />
           <span style={{ fontSize: '14px', fontWeight: '700', color: '#888' }}>나의 티켓 센터</span>
         </div>
       </nav>
@@ -73,16 +72,15 @@ function MyPage() {
       <div className="container" style={{ marginTop: '40px', paddingBottom: '100px' }}>
         <div style={{ display: 'flex', gap: '32px', alignItems: 'flex-start' }}>
 
-          {/* 사이드바 */}
           <aside style={{ width: '210px', flexShrink: 0 }}>
             <div style={{ backgroundColor: '#fff', borderRadius: '16px', padding: '24px 20px', marginBottom: '12px', border: '1px solid #ebebeb', textAlign: 'center' }}>
-              <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'linear-gradient(135deg,#ff2351,#ff7096)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px', fontSize: '22px' }}>🎟️</div>
+              <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'linear-gradient(135deg,#2563eb,#60a5fa)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px', fontSize: '22px' }}>🎟️</div>
               <p style={{ fontSize: '14px', fontWeight: '800', color: '#0a0a0a', marginBottom: '4px' }}>{user.name}</p>
               <p style={{ fontSize: '11px', color: '#aaa', marginBottom: '14px' }}>{user.email}</p>
-              <div style={{ background: '#fff0f3', borderRadius: '10px', padding: '12px', fontSize: '13px' }}>
+              <div style={{ background: '#eff6ff', borderRadius: '10px', padding: '12px', fontSize: '13px' }}>
                 <span style={{ color: '#aaa', fontSize: '11px', fontWeight: '600' }}>보유 포인트</span><br />
-                <span style={{ color: '#ff2351', fontWeight: '900', fontSize: '20px' }}>{user.point?.toLocaleString()}</span>
-                <span style={{ color: '#ff2351', fontSize: '12px', fontWeight: '700' }}> P</span>
+                <span style={{ color: '#2563eb', fontWeight: '900', fontSize: '20px' }}>{user.point?.toLocaleString()}</span>
+                <span style={{ color: '#2563eb', fontSize: '12px', fontWeight: '700' }}> P</span>
               </div>
             </div>
             <div style={{ backgroundColor: '#fff', borderRadius: '16px', overflow: 'hidden', border: '1px solid #ebebeb' }}>
@@ -94,8 +92,8 @@ function MyPage() {
                     display: 'block', width: '100%', padding: '15px 20px',
                     border: 'none', background: 'none', textAlign: 'left', cursor: 'pointer',
                     fontSize: '14px', fontWeight: activeTab === tab.id ? '800' : '500',
-                    color: activeTab === tab.id ? '#ff2351' : '#666',
-                    borderLeft: `3px solid ${activeTab === tab.id ? '#ff2351' : 'transparent'}`,
+                    color: activeTab === tab.id ? '#2563eb' : '#666',
+                    borderLeft: `3px solid ${activeTab === tab.id ? '#2563eb' : 'transparent'}`,
                     borderBottom: i < TABS.length - 1 ? '1px solid #f5f5f5' : 'none',
                     fontFamily: 'inherit', transition: 'all 0.15s',
                   }}
@@ -106,7 +104,6 @@ function MyPage() {
             </div>
           </aside>
 
-          {/* 콘텐츠 */}
           <main style={{ flex: 1 }}>
 
             {activeTab === 'reservations' && (
@@ -127,11 +124,11 @@ function MyPage() {
                         key={res.reservationId}
                         onClick={() => navigate(`/mypage/reservation/${res.reservationId}`)}
                         style={{ backgroundColor: '#fff', border: '1px solid #ebebeb', borderRadius: '14px', padding: '20px 22px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', transition: 'all 0.18s' }}
-                        onMouseOver={e => { e.currentTarget.style.borderColor = '#ff2351'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(255,35,81,0.09)'; }}
+                        onMouseOver={e => { e.currentTarget.style.borderColor = '#2563eb'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(37,99,235,0.10)'; }}
                         onMouseOut={e => { e.currentTarget.style.borderColor = '#ebebeb'; e.currentTarget.style.transform = 'none'; e.currentTarget.style.boxShadow = 'none'; }}
                       >
                         <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
-                          <div style={{ width: '44px', height: '44px', backgroundColor: '#fff0f3', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', flexShrink: 0 }}>🎫</div>
+                          <div style={{ width: '44px', height: '44px', backgroundColor: '#eff6ff', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '20px', flexShrink: 0 }}>🎫</div>
                           <div>
                             <h4 style={{ margin: '0 0 5px', fontSize: '14px', fontWeight: '800', color: '#0a0a0a' }}>{res.eventTitle}</h4>
                             <p style={{ fontSize: '12px', color: '#aaa', fontWeight: '500' }}>
@@ -145,7 +142,7 @@ function MyPage() {
                             좌석변경
                           </button>
                           <button onClick={e => { e.stopPropagation(); handleCancel(res.reservationId); }}
-                            style={{ padding: '8px 14px', border: '1px solid #ff2351', borderRadius: '50px', background: '#fff', fontSize: '12px', fontWeight: '700', cursor: 'pointer', color: '#ff2351', fontFamily: 'inherit' }}>
+                            style={{ padding: '8px 14px', border: '1px solid #2563eb', borderRadius: '50px', background: '#fff', fontSize: '12px', fontWeight: '700', cursor: 'pointer', color: '#2563eb', fontFamily: 'inherit' }}>
                             취소
                           </button>
                         </div>
@@ -164,7 +161,7 @@ function MyPage() {
                   <div style={{ fontSize: '56px', fontWeight: '900', color: '#0a0a0a', letterSpacing: '-2px', lineHeight: 1, marginBottom: '6px' }}>
                     {user.point?.toLocaleString()}
                   </div>
-                  <p style={{ fontSize: '18px', fontWeight: '800', color: '#ff2351', marginBottom: '44px' }}>P</p>
+                  <p style={{ fontSize: '18px', fontWeight: '800', color: '#2563eb', marginBottom: '44px' }}>P</p>
                   <form onSubmit={handleChargePoint} style={{ display: 'flex', gap: '10px', maxWidth: '340px', margin: '0 auto' }}>
                     <input type="number" placeholder="충전할 금액" value={chargeAmount} onChange={e => setChargeAmount(e.target.value)}
                       className="vivid-input" style={{ height: '48px', borderRadius: '12px', paddingRight: '16px', fontSize: '15px' }} />

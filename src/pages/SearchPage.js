@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchEvents } from '../api/eventApi';
 import EventCard from '../components/EventCard';
+import logo from '../assets/logo.png';
 import '../App.css';
 
 const CATEGORIES = [
@@ -18,7 +19,6 @@ const SORTS = [
   { id: 'CLOSING', label: '마감임박' },
 ];
 
-// 중복 제거 헬퍼
 const dedupeById = (list) => {
   const seen = new Set();
   return list.filter(item => {
@@ -37,20 +37,17 @@ function SearchPage() {
   const navigate = useNavigate();
   const searchTerm = new URLSearchParams(location.search).get('query') || '';
 
-  // ✅ 백엔드에 keyword + category 직접 던져서 검색 (확장 검색은 백엔드가 처리)
   useEffect(() => {
     if (!searchTerm.trim()) { setResults([]); setLoading(false); return; }
 
     setLoading(true);
     const categoryParam = activeCategory === 'ALL' ? '' : activeCategory;
 
-    // 페이지 0, 사이즈 100으로 충분한 양 가져온 뒤 클라이언트에서 정렬
     fetchEvents(0, 100, categoryParam, searchTerm)
       .then(data => {
         const list = data.content || data || [];
         let sorted = dedupeById(list);
 
-        // 정렬
         if (sortBy === 'RECENT') {
           sorted.sort((a, b) => new Date(b.startTime || 0) - new Date(a.startTime || 0));
         } else if (sortBy === 'CLOSING') {
@@ -75,9 +72,7 @@ function SearchPage() {
     <div style={{ backgroundColor: '#fff', minHeight: '100vh' }}>
       <nav className="navbar">
         <div className="container" style={{ display: 'flex', alignItems: 'center', width: '100%', gap: '20px' }}>
-          <div onClick={() => navigate('/')} style={{ fontSize: '22px', fontWeight: '900', color: '#ff2351', cursor: 'pointer', letterSpacing: '-2px', userSelect: 'none', flexShrink: 0 }}>
-            VIVID HW
-          </div>
+          <img src={logo} alt="DEAR TICKET" onClick={() => navigate('/')} style={{ height: '36px', cursor: 'pointer', userSelect: 'none', objectFit: 'contain' }} />
           <div style={{ height: '20px', width: '1px', background: '#ebebeb' }} />
           <p style={{ fontSize: '15px', color: '#666', fontWeight: '500' }}>
             '<span style={{ color: '#0a0a0a', fontWeight: '800' }}>{searchTerm}</span>' 검색 결과
@@ -86,19 +81,17 @@ function SearchPage() {
       </nav>
 
       <div className="container" style={{ marginTop: '40px', display: 'flex', gap: '40px', paddingBottom: '80px' }}>
-        {/* 사이드바 */}
         <aside style={{ width: '180px', flexShrink: 0 }}>
           <h3 style={{ fontSize: '11px', fontWeight: '800', color: '#aaa', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '14px' }}>카테고리</h3>
           <ul style={{ listStyle: 'none' }}>
             {CATEGORIES.map(cat => (
-              <li key={cat.id} onClick={() => setActiveCategory(cat.id)} style={{ padding: '12px 0', cursor: 'pointer', fontSize: '14px', fontWeight: activeCategory === cat.id ? '800' : '500', color: activeCategory === cat.id ? '#ff2351' : '#666', borderBottom: '1px solid #f5f5f5', transition: 'color 0.15s' }}>
+              <li key={cat.id} onClick={() => setActiveCategory(cat.id)} style={{ padding: '12px 0', cursor: 'pointer', fontSize: '14px', fontWeight: activeCategory === cat.id ? '800' : '500', color: activeCategory === cat.id ? '#2563eb' : '#666', borderBottom: '1px solid #f5f5f5', transition: 'color 0.15s' }}>
                 {cat.label}
               </li>
             ))}
           </ul>
         </aside>
 
-        {/* 메인 */}
         <main style={{ flex: 1 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid #ebebeb' }}>
             <span style={{ fontSize: '14px', color: '#aaa', fontWeight: '600' }}>

@@ -1,6 +1,7 @@
 // src/pages/SuccessPage.js
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import logo from '../assets/logo.png';
 import '../App.css';
 
 function SuccessPage() {
@@ -12,16 +13,11 @@ function SuccessPage() {
     <div style={{ minHeight: '100vh', backgroundColor: '#fafafa', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px' }}>
       <div style={{ backgroundColor: '#fff', padding: '56px 44px', borderRadius: '24px', border: '1px solid #ebebeb', boxShadow: '0 20px 60px rgba(0,0,0,0.08)', textAlign: 'center', maxWidth: '460px', width: '100%', position: 'relative', overflow: 'hidden' }}>
 
-        {/* 상단 포인트 라인 */}
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: 'linear-gradient(to right, #ff2351, #ff7096)' }} />
+        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: 'linear-gradient(to right, #2563eb, #60a5fa)' }} />
 
-        {/* 로고 */}
-        <div onClick={() => navigate('/')} style={{ fontSize: '20px', fontWeight: '900', color: '#ff2351', letterSpacing: '-2px', cursor: 'pointer', marginBottom: '32px', userSelect: 'none' }}>
-          VIVID HW
-        </div>
+        <img src={logo} alt="DEAR TICKET" onClick={() => navigate('/')} style={{ height: '36px', cursor: 'pointer', userSelect: 'none', objectFit: 'contain', marginBottom: '32px' }} />
 
-        {/* 아이콘 */}
-        <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: '#fff0f3', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', fontSize: '36px' }}>
+        <div style={{ width: '80px', height: '80px', borderRadius: '50%', background: '#eff6ff', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', fontSize: '36px' }}>
           {isChangeMode ? '🔄' : '✅'}
         </div>
 
@@ -29,10 +25,9 @@ function SuccessPage() {
           {isChangeMode ? '좌석 변경 완료!' : '예매가 완료되었습니다!'}
         </h1>
         <p style={{ fontSize: '14px', color: '#aaa', fontWeight: '500', lineHeight: '1.7', marginBottom: '36px' }}>
-          {isChangeMode ? '새로운 좌석으로 변경되었습니다.' : 'VIVID HW를 이용해 주셔서 감사합니다.'}
+          {isChangeMode ? '새로운 좌석으로 변경되었습니다.' : 'DEAR TICKET을 이용해 주셔서 감사합니다.'}
         </p>
 
-        {/* 티켓 정보 요약 */}
         <div style={{ background: '#fafafa', border: '1px solid #f0f0f0', borderRadius: '16px', padding: '28px', marginBottom: '32px', textAlign: 'left' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '16px', borderBottom: '1px dashed #ebebeb', marginBottom: '16px' }}>
             <span style={{ fontSize: '13px', fontWeight: '700', color: '#aaa' }}>선택 좌석</span>
@@ -40,15 +35,14 @@ function SuccessPage() {
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ fontSize: '13px', fontWeight: '700', color: '#aaa' }}>{isChangeMode ? '정산 금액' : '결제 금액'}</span>
-            <span style={{ fontSize: '22px', fontWeight: '900', color: '#ff2351', letterSpacing: '-0.5px' }}>
+            <span style={{ fontSize: '22px', fontWeight: '900', color: '#2563eb', letterSpacing: '-0.5px' }}>
               {price ? price.toLocaleString() : '0'}원
             </span>
           </div>
         </div>
 
-        {/* 버튼 */}
         <div style={{ display: 'flex', gap: '10px' }}>
-          <button onClick={() => navigate('/')} style={{ flex: 1, padding: '16px 0', fontSize: '14px', fontWeight: '700', background: '#fff', color: '#666', border: '1px solid #ddd', borderRadius: '12px', cursor: 'pointer', fontFamily: 'inherit', transition: 'all 0.15s' }}>
+          <button onClick={() => navigate('/')} style={{ flex: 1, padding: '16px 0', fontSize: '14px', fontWeight: '700', background: '#fff', color: '#666', border: '1px solid #ddd', borderRadius: '12px', cursor: 'pointer', fontFamily: 'inherit' }}>
             홈으로
           </button>
           <button onClick={() => navigate('/mypage')} className="vivid-button" style={{ flex: 1.5, height: '52px', borderRadius: '12px', fontSize: '14px' }}>
