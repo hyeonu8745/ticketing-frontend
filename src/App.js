@@ -9,7 +9,8 @@ import SeatPage from './pages/SeatPage';
 import SuccessPage from './pages/SuccessPage';
 import MyPage from './pages/MyPage';
 import SearchPage from './pages/SearchPage';
-import ReservationDetailPage from './pages/ReservationDetailPage'; // 🌟 추가
+import ReservationDetailPage from './pages/ReservationDetailPage';
+import ChatBot from './components/ChatBot'; // 🌟 추가
 import './App.css';
 
 function App() {
@@ -27,10 +28,11 @@ function App() {
         <Route path="/events/:eventId/success" element={<SuccessPage />} />
         
         <Route path="/mypage" element={<MyPage />} />
-        {/* 🌟 예약 상세 페이지 경로 추가 */}
         <Route path="/mypage/reservation/:reservationId" element={<ReservationDetailPage />} />
-        
       </Routes>
+
+      {/* 🌟 모든 페이지에서 챗봇 플로팅 버튼 표시 */}
+      <ChatBot />
     </Router>
   );
 }

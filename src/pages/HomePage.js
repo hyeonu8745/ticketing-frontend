@@ -57,14 +57,29 @@ const toHttps = (url) => {
 
 function RankSection({ title, events, navigate }) {
   const ref = useRef(null);
+
+  useEffect(() => {
+    // 약간의 지연(50ms)을 주어 브라우저 렌더링 및 네이티브 스크롤 복원 기능이 완전히 끝난 후 0으로 덮어씌움
+    const timer = setTimeout(() => {
+      if (ref.current) {
+        ref.current.scrollLeft = 0;
+      }
+    }, 50); 
+    
+    // 컴포넌트 언마운트 시 타이머 정리
+    return () => clearTimeout(timer);
+  }, [events]);
+
   const scroll = (dir) => ref.current?.scrollBy({ left: dir === 'left' ? -540 : 540, behavior: 'smooth' });
+  
   if (!events.length) return null;
+  
   return (
     <div style={{ marginBottom: '48px' }}>
       <div className="section-title">{title}</div>
       <div style={{ position: 'relative' }}>
         <button className="scroll-arrow-btn left" onClick={() => scroll('left')}>❮</button>
-        <div ref={ref} className="hide-scrollbar" style={{ display: 'flex', gap: '14px', overflowX: 'auto', paddingBottom: '4px', scrollSnapType: 'x mandatory' }}>
+        <div ref={ref} className="hide-scrollbar" style={{ display: 'flex', gap: '14px', overflowX: 'auto', paddingBottom: '4px', paddingLeft: '24px', paddingRight: '24px', scrollSnapType: 'x mandatory' }}>
           {events.map((event, idx) => (
             <div key={`${title}-${event.id}`} style={{ width: '160px', flexShrink: 0, scrollSnapAlign: 'start' }}>
               <EventCard event={event} rank={idx + 1} />
