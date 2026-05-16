@@ -112,6 +112,17 @@ function HomePage() {
   const isNewCategory = useRef(false);
   const isLoggedIn = !!localStorage.getItem('token');
 
+  // 관리자 여부 확인
+  const isAdmin = (() => {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+    try {
+      const payload = token.split('.')[1];
+      const json = JSON.parse(atob(payload.replace(/-/g, '+').replace(/_/g, '/')));
+      return json.role === 'ROLE_ADMIN';
+    } catch { return false; }
+  })();
+
   useEffect(() => {
     fetchEvents(0, 100, '', '').then(data => {
       setAllEvents(dedupeById(data.content || data));
@@ -244,6 +255,15 @@ function HomePage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
             {isLoggedIn ? (
               <>
+                {isAdmin && (
+                  <button
+                    className="nav-btn"
+                    onClick={() => navigate('/admin')}
+                    style={{ color: '#2563eb', fontWeight: '800' }}
+                  >
+                    관리자 콘솔
+                  </button>
+                )}
                 <button className="nav-btn" onClick={() => navigate('/mypage')}>마이페이지</button>
                 <button className="nav-btn" onClick={handleLogout}>로그아웃</button>
               </>

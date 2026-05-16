@@ -11,6 +11,12 @@ import MyPage from './pages/MyPage';
 import SearchPage from './pages/SearchPage';
 import ReservationDetailPage from './pages/ReservationDetailPage';
 import ChatBot from './components/ChatBot'; // 🌟 추가
+import AdminLayout from './pages/admin/AdminLayout';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminEventsPage from './pages/admin/AdminEventsPage';
+import AdminReservationsPage from './pages/admin/AdminReservationsPage';
+import AdminUsersPage from './pages/admin/AdminUsersPage';
+import AdminReviewsPage from './pages/admin/AdminReviewsPage';
 import './App.css';
 
 function App() {
@@ -29,6 +35,13 @@ function App() {
         
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/mypage/reservation/:reservationId" element={<ReservationDetailPage />} />
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="events" element={<AdminEventsPage />} />
+          <Route path="reservations" element={<AdminReservationsPage />} />
+          <Route path="users" element={<AdminUsersPage />} />
+          <Route path="reviews" element={<AdminReviewsPage />} />
+        </Route>
       </Routes>
 
       {/* 🌟 모든 페이지에서 챗봇 플로팅 버튼 표시 */}

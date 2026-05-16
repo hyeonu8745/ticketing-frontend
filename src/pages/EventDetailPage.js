@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import API from '../api/index';
 import logo from '../assets/logo.png';
+import ReviewSection from '../components/ReviewSection';
 import '../App.css';
 
 // 이미지 URL 처리 (프록시 URL 또는 http→https 변환)
@@ -21,6 +22,8 @@ function EventDetailPage() {
   const [loading, setLoading] = useState(true);
   const [recommendations, setRecommendations] = useState([]);
   const [forecast, setForecast] = useState(null);
+  const [activeTab, setActiveTab] = useState('info'); // 'info' | 'review'
+  const currentUserId = localStorage.getItem('userId');
   const isLoggedIn = !!localStorage.getItem('token');
 
   useEffect(() => {
@@ -196,17 +199,46 @@ function EventDetailPage() {
           </div>
         </div>
 
-        {/* 공연 정보 탭 */}
+        {/* 공연 정보 / 관람 후기 탭 */}
         <section>
           <div style={{ borderBottom: '1px solid #ebebeb', display: 'flex', gap: '32px', marginBottom: '40px' }}>
-            <div style={{ padding: '14px 2px', borderBottom: '2.5px solid #0a0a0a', fontWeight: '800', fontSize: '16px', cursor: 'pointer' }}>공연정보</div>
-            <div style={{ padding: '14px 2px', color: '#bbb', fontSize: '16px', cursor: 'pointer' }}>관람후기</div>
+            <div
+              onClick={() => setActiveTab('info')}
+              style={{
+                padding: '14px 2px',
+                borderBottom: activeTab === 'info' ? '2.5px solid #0a0a0a' : '2.5px solid transparent',
+                fontWeight: activeTab === 'info' ? '800' : '600',
+                fontSize: '16px',
+                color: activeTab === 'info' ? '#0a0a0a' : '#bbb',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+              }}
+            >공연정보</div>
+            <div
+              onClick={() => setActiveTab('review')}
+              style={{
+                padding: '14px 2px',
+                borderBottom: activeTab === 'review' ? '2.5px solid #0a0a0a' : '2.5px solid transparent',
+                fontWeight: activeTab === 'review' ? '800' : '600',
+                fontSize: '16px',
+                color: activeTab === 'review' ? '#0a0a0a' : '#bbb',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+              }}
+            >관람후기</div>
           </div>
-          <div style={{ maxWidth: '760px', margin: '0 auto' }}>
-            {event.description ? renderDescription(event.description) : (
-              <p style={{ color: '#bbb', padding: '60px 0', textAlign: 'center', fontSize: '15px' }}>상세 공연 정보가 준비 중입니다.</p>
-            )}
-          </div>
+
+          {activeTab === 'info' ? (
+            <div style={{ maxWidth: '760px', margin: '0 auto' }}>
+              {event.description ? renderDescription(event.description) : (
+                <p style={{ color: '#bbb', padding: '60px 0', textAlign: 'center', fontSize: '15px' }}>
+                  상세 공연 정보가 준비 중입니다.
+                </p>
+              )}
+            </div>
+          ) : (
+            <ReviewSection eventId={eventId} currentUserId={currentUserId} />
+          )}
         </section>
 
         {/* AI 추천 섹션 */}
