@@ -139,3 +139,10 @@ npm start
 - 401 응답 시 자동 로그아웃 처리
 
 백엔드 실행 방법은 [Backend README](../server/README.md) 참고
+
+---
+
+## 🔗 관련 레포지토리
+
+- 백엔드: [DEAR TICKET Backend](https://github.com/hyeonu8745/ticketing-server)
+- AI 서버: [DEAR TICKET AI](https://github.com/hyeonu8745/ticketing-ai)
