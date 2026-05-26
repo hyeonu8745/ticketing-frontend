@@ -21,6 +21,8 @@ function AdminUsersPage() {
     }
   };
 
+  // 🌟 ESLint 경고(Warning) 해결을 위한 주석 추가
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { load(0, ''); }, []);
 
   const handleSearch = () => {

@@ -27,6 +27,7 @@ function AdminReservationsPage() {
     }
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { load(0, '', ''); }, []);
 
   const handleSearch = () => {
