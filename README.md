@@ -110,17 +110,39 @@ src/
 `.env` 파일을 프로젝트 루트에 생성:
 
 ```env
-REACT_APP_API_URL=http://localhost:8080
+PORT=3001
+HOST=0.0.0.0
+DANGEROUSLY_DISABLE_HOST_CHECK=true
+WDS_SOCKET_HOST=www.jihyeonu.com
+WDS_SOCKET_PORT=443
+WDS_SOCKET_PATH=/ws
+REACT_APP_API_URL=https://api.jihyeonu.com
 ```
 
-### 2. 패키지 설치 및 실행
+### 2. 패키지 설치 및 개발 서버 실행
 
 ```bash
 npm install
 npm start
 ```
 
-기본 포트: `http://localhost:3000`
+기본 포트: `http://localhost:3001`
+
+### 3. 프로덕션 빌드 및 배포
+
+```bash
+# 빌드
+npm run build
+
+# build/ 폴더를 Nginx 서빙 경로에 복사 (WSL)
+cp -r build/* /var/www/ticketing/
+
+# Nginx 재시작
+sudo systemctl reload nginx
+```
+
+> 배포 후에는 `npm start` 없이 Nginx가 정적 파일을 직접 서빙합니다.
+> Cloudflare Tunnel에서 `jihyeonu.com → http://localhost:80` 으로 설정해야 합니다.
 
 ---
 
